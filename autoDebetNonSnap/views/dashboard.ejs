@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Auto Debet</title>
+</head>
+<body>
+    <div style="display: flex; justify-content: center; align-items: center; height: 100%; width: 100%;margin-top: 10vw; flex-direction: column;">
+        <div style="display: flex; flex-direction: column;">
+            <h1>User <%= customerUniqueId %></h1>
+            <p>Phone <%= phoneNumber %></p><br/>
+            <p>Saldo Rp. <%= saldo.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") %></p><br/>
+            <% if(status == 'Success') {%>
+                <p style="color: green;"><%= JSON.stringify(status) %></p>
+            <% } else if(status) { %>
+                <p style="color: red;"><%= JSON.stringify(status) %></p>
+            <% } %>
+            <div style="display: flex;">
+                <a href="/ovo-instruction?credentialCode=<%= credentialCode %>" target="_blank"><input type="button" value="See Instruction"></a> &nbsp;&nbsp;
+                <a href="/logout" target="_blank"><input type="button" value="Disconnect"></a> &nbsp;&nbsp;
+                <form action="/bill" method="post">
+                    <input type="number" name="amount" id="amount" placeholder="amount to bill" required>
+                    <input type="text" name="user" id="user" value="<%= customerUniqueId %>" hidden>
+                    <input type="text" name="phone" id="phone" value="<%= phoneNumber %>" hidden>
+                    <input type="text" name="saldo" id="saldo" value="<%= saldo %>" hidden>
+                    <input type="text" name="credcode" id="credcode" value="<%= credentialCode %>" hidden>
+                    <input type="radio" name="transactionType" id="transactionType" value="A"><label>Automate</label>
+                    <input type="radio" name="transactionType" id="transactionType" value="M"><label>Manual</label>
+                    <input type="submit" value="request bill">
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

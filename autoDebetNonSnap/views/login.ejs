@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Auto Debet</title>
+</head>
+<body>
+    <div style="display: flex; justify-content: center; align-items: center; height: 100%; width: 100%;margin-top: 10vw; flex-direction: column;">
+        <% if(err) {%>
+            <p style="color: red;"><%= JSON.stringify(err.reason) %></p>
+        <% } %>
+        <form action="/login" method="post" style="display: flex; flex-direction: column;">
+            <input type="text" name="phone" id="phone" placeholder="phone number" required>
+            <input type="email" name="email" id="email" placeholder="email" required>
+            <input type="submit" value="link">
+        </form>
+    </div>
+</body>
+</html>
